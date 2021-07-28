@@ -29,7 +29,7 @@ public class Answer {
 	private LocalDateTime dtCreation = LocalDateTime.now();
 
 	@ManyToOne
-	private User author;
+	private User user;
 
 	private Boolean isSolution = false;
 
