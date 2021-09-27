@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -37,8 +36,6 @@ public class TopicService {
     }
 
     public Topic getTopic(Long id) {
-        Topic topic = topicRepository.getOne(id);
-        System.out.println(topic);
-        return topic;
+        return topicRepository.getOne(id);
     }
 }

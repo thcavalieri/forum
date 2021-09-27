@@ -1,4 +1,4 @@
-package br.com.thiagocavalieri.forum.controller.validation;
+package br.com.thiagocavalieri.forum.validation;
 
 import br.com.thiagocavalieri.forum.dto.MethodInputErrorDTO;
 import lombok.AllArgsConstructor;
