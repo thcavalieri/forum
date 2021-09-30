@@ -9,11 +9,13 @@ import br.com.thiagocavalieri.forum.repository.CourseRepository;
 import br.com.thiagocavalieri.forum.repository.TopicRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -22,11 +24,13 @@ public class TopicService {
     private TopicRepository topicRepository;
     private CourseRepository courseRepository;
 
-    public List<Topic> getListTopics(String courseName) {
+    public Page<Topic> getListTopics(String courseName, int page, int size) {
+        Pageable pagination = PageRequest.of(page, size);
+
         if (StringUtils.hasText(courseName)) {
-            return topicRepository.findByCourseName(courseName);
+            return topicRepository.findByCourseName(courseName, pagination);
         }
-        return topicRepository.findAll();
+        return topicRepository.findAll(pagination);
     }
 
     public Topic createTopic(TopicCreateDTO requestDTO) {

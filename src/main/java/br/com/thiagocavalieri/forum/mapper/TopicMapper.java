@@ -1,8 +1,8 @@
 package br.com.thiagocavalieri.forum.mapper;
 
+import br.com.thiagocavalieri.forum.dto.TopicCreateDTO;
 import br.com.thiagocavalieri.forum.dto.TopicDTO;
 import br.com.thiagocavalieri.forum.dto.TopicDetailDTO;
-import br.com.thiagocavalieri.forum.dto.TopicCreateDTO;
 import br.com.thiagocavalieri.forum.model.Topic;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
@@ -17,7 +17,6 @@ public interface TopicMapper {
     TopicMapper MAPPER = Mappers.getMapper(TopicMapper.class);
 
     TopicDTO topicModelToDTO(Topic topic);
-
 
     @Mappings({
             @Mapping(source = "user.name", target = "userName")
