@@ -21,7 +21,7 @@ public class ValidationErrorHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<MethodInputErrorDTO> handle(MethodArgumentNotValidException exception) {
+    protected List<MethodInputErrorDTO> handle(MethodArgumentNotValidException exception) {
         return exception.getBindingResult().getFieldErrors().stream().map(e ->
                 new MethodInputErrorDTO(e.getField(), messageSource.getMessage(e, LocaleContextHolder.getLocale()))
         ).collect(Collectors.toList());
