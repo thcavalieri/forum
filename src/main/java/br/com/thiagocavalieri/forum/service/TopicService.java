@@ -9,6 +9,7 @@ import br.com.thiagocavalieri.forum.repository.CourseRepository;
 import br.com.thiagocavalieri.forum.repository.TopicRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -64,7 +65,7 @@ public class TopicService {
     public void deleteTopic(Long id) {
         try {
             topicRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException|InvalidDataAccessResourceUsageException e) {
             throw new EntityNotFoundException(e.getMessage());
         }
     }
