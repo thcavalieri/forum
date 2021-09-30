@@ -8,6 +8,7 @@ import br.com.thiagocavalieri.forum.mapper.TopicMapper;
 import br.com.thiagocavalieri.forum.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +31,17 @@ public class TopicsController {
 
     private TopicService topicService;
 
+    // Request example http://localhost:8080/topics?page=0&size=3&orderBy=id&orderBy=title
     @GetMapping
     public Page<TopicDTO> topicList(@RequestParam(required = false) String courseName, @RequestParam int page,
-                                    @RequestParam int size) {
-        return topicService.getListTopics(courseName, page, size).map(TopicMapper.MAPPER::topicModelToDTO);
+                                    @RequestParam int size, @RequestParam String... orderBy) {
+        return topicService.getListTopics(courseName, page, size, orderBy).map(TopicMapper.MAPPER::topicModelToDTO);
+    }
+
+    // Request example http://localhost:8080/topics/pagination?page=0&size=3&sort=id,title,desc
+    @GetMapping("/pagination")
+    public Page<TopicDTO> topicList(@RequestParam(required = false) String courseName, Pageable pagination) {
+        return topicService.getListTopics(courseName, pagination).map(TopicMapper.MAPPER::topicModelToDTO);
     }
 
     // Rest good practices: This method returns the http status code 201 and the header contains the Location

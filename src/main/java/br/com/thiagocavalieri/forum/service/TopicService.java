@@ -12,6 +12,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,9 +26,14 @@ public class TopicService {
     private TopicRepository topicRepository;
     private CourseRepository courseRepository;
 
-    public Page<Topic> getListTopics(String courseName, int page, int size) {
-        Pageable pagination = PageRequest.of(page, size);
+    // Manual pagination without necessity of @EnableSpringDataWebSupport in main class.
+    public Page<Topic> getListTopics(String courseName, int page, int size, String... orderBy) {
+        Pageable pagination = PageRequest.of(page, size, Sort.Direction.ASC, orderBy);
+        return this.getListTopics(courseName, pagination);
+    }
 
+    public Page<Topic> getListTopics(String courseName,
+                                     @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pagination) {
         if (StringUtils.hasText(courseName)) {
             return topicRepository.findByCourseName(courseName, pagination);
         }
