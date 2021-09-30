@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class TopicRequestDTO {
+public class TopicCreateDTO {
 
     @NotEmpty @Length(min = 5)
     private String title;
