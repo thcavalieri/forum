@@ -1,4 +1,4 @@
-package br.com.thiagocavalieri.forum.service;
+package br.com.thiagocavalieri.forum.security;
 
 import br.com.thiagocavalieri.forum.model.User;
 import br.com.thiagocavalieri.forum.repository.UserRepository;
