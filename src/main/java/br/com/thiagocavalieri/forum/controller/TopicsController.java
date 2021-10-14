@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,5 +75,13 @@ public class TopicsController {
     public void deleteTopic(@PathVariable Long id) {
         topicService.deleteTopic(id);
     }
+
+    @GetMapping("/test_authority")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String testAuthority() {
+        return "You are Admin.";
+    }
+
+
 
 }

@@ -1,5 +1,9 @@
 INSERT INTO USER(name, email, password) VALUES('Thiago', 'thiago@email.com', '$2a$10$X30c5ecb9OG8uyKQeHg29.E8vsmUNCgzAyEq2iXtFxPQipiWBGb0y');
+INSERT INTO USER(name, email, password) VALUES('Thiago2', 'thiago2@email.com', '$2a$10$X30c5ecb9OG8uyKQeHg29.E8vsmUNCgzAyEq2iXtFxPQipiWBGb0y');
 -- Password = 123456
+INSERT INTO AUTHORITY(name) VALUES('ROLE_ADMIN');
+INSERT INTO USER_AUTHORITY(user_id, authority_id) VALUES(1,1);
+
 
 INSERT INTO COURSE(name, category) VALUES('Spring Boot', 'Programming');
 INSERT INTO COURSE(name, category) VALUES('HTML 5', 'Front-end');

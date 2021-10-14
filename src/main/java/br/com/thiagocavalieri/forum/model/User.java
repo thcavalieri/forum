@@ -5,11 +5,14 @@ import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,12 +31,19 @@ public class User implements UserDetails {
 	private String email;
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Profile> listProfile = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "USER_AUTHORITY",
+			joinColumns = {
+					@JoinColumn(name = "user_id")
+			},
+			inverseJoinColumns = {
+					@JoinColumn(name = "authority_id")
+			})
+	private List<Authority> listAuthorities = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.listProfile;
+		return this.listAuthorities;
 	}
 
 	@Override
