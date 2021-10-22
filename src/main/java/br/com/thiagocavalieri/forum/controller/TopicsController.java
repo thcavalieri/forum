@@ -76,6 +76,7 @@ public class TopicsController {
         topicService.deleteTopic(id);
     }
 
+    // Simple api to test authorities
     @GetMapping("/test_authority")
     @PreAuthorize("hasRole('ADMIN')")
     public String testAuthority() {
