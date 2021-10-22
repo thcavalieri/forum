@@ -52,8 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Method for authorization configuration
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll().and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+        http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.GET,"/topics", "/topics/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth").permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
@@ -67,6 +66,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Method for static sources(js, images, css, etc) configuration
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/**.html",
+                        "/swagger-ui/**",
+                        "/v2/api-docs",
+                        "/webjars/**",
+                        "/configuration/**",
+                        "/swagger-resources/**",
+                        "/h2-console/**");
     }
 
     /* This main is here just for test proposal. If you want another password to test the security, you can use this method

@@ -17,6 +17,8 @@ spring:
     admin:
       client:
         url: http://localhost:8081
+        instance:
+          serviceBaseUrl: http://localhost:8080
 
 # jwt
 forum:
