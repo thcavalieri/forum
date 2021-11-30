@@ -22,7 +22,7 @@ public class TokenService {
     }
 
     public String generateToken(User user) {
-        Instant today = Instant.now();
+        var today = Instant.now();
 
         return Jwts.builder().setIssuer("Forum API")
                 .setSubject(user.getId().toString())

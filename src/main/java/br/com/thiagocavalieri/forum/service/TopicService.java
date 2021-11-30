@@ -29,7 +29,7 @@ public class TopicService {
 
     // Manual pagination without necessity of @EnableSpringDataWebSupport in main class.
     public Page<Topic> getListTopics(String courseName, int page, int size, String... orderBy) {
-        Pageable pagination = PageRequest.of(page, size, Sort.Direction.ASC, orderBy);
+        var pagination = PageRequest.of(page, size, Sort.Direction.ASC, orderBy);
         return this.getListTopics(courseName, pagination);
     }
 
@@ -42,8 +42,8 @@ public class TopicService {
     }
 
     public Topic createTopic(TopicCreateDTO requestDTO) {
-        Topic topic = TopicMapper.MAPPER.topicRequestDTOToModel(requestDTO);
-        Course course = courseRepository.findByName(requestDTO.getCourseName());
+        var topic = TopicMapper.MAPPER.topicRequestDTOToModel(requestDTO);
+        var course = courseRepository.findByName(requestDTO.getCourseName());
 
         topic.setCourse(course);
 
@@ -55,7 +55,7 @@ public class TopicService {
     }
 
     public Topic updateTopic(Long id, TopicUpdateDTO requestDTO) {
-        Topic topic = topicRepository.getOne(id);
+        var topic = topicRepository.getOne(id);
         topic.setTitle(requestDTO.getTitle());
         topic.setMessage(requestDTO.getMessage());
 

@@ -29,7 +29,7 @@ public class AuthenticationController {
     @PostMapping
     public ResponseEntity<TokenDTO> authenticate(@RequestBody @Valid UserLoginDTO userLoginDTO) {
         try {
-            User user = (User) authenticationManager
+            var user = (User) authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(userLoginDTO.getEmail(), userLoginDTO.getPassword()))
                     .getPrincipal();
 

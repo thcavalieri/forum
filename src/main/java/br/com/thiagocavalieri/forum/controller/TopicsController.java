@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 @AllArgsConstructor
 @RestController
@@ -53,8 +52,8 @@ public class TopicsController {
     @PostMapping
     @CacheEvict(value = "topicList", allEntries = true)
     public ResponseEntity<TopicDTO> createTopic(@RequestBody @Valid TopicCreateDTO requestDTO, UriComponentsBuilder uriBuilder) {
-        TopicDTO dto = TopicMapper.MAPPER.topicModelToDTO(topicService.createTopic(requestDTO));
-        URI uri = uriBuilder.path("/topics/{id}").buildAndExpand(dto.getId()).toUri();
+        var dto = TopicMapper.MAPPER.topicModelToDTO(topicService.createTopic(requestDTO));
+        var uri = uriBuilder.path("/topics/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
@@ -66,7 +65,7 @@ public class TopicsController {
     @PutMapping("/{id}")
     @CacheEvict(value = "topicList", allEntries = true)
     public ResponseEntity<TopicDTO> updateTopic(@PathVariable Long id, @RequestBody @Valid TopicUpdateDTO requestDTO) {
-        TopicDTO dto = TopicMapper.MAPPER.topicModelToDTO(topicService.updateTopic(id, requestDTO));
+        var dto = TopicMapper.MAPPER.topicModelToDTO(topicService.updateTopic(id, requestDTO));
         return ResponseEntity.ok(dto);
     }
 
