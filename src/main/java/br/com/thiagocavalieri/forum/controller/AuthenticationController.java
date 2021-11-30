@@ -5,6 +5,7 @@ import br.com.thiagocavalieri.forum.dto.UserLoginDTO;
 import br.com.thiagocavalieri.forum.model.User;
 import br.com.thiagocavalieri.forum.security.TokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
+@Profile("prod")
 public class AuthenticationController {
 
     private AuthenticationManager authenticationManager;
